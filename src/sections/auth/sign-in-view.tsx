@@ -1,82 +1,77 @@
-import { useState, useCallback } from 'react';
+import { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputAdornment from '@mui/material/InputAdornment';
-
-import { useRouter } from 'src/routes/hooks';
-
-import { Iconify } from 'src/components/iconify';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // ----------------------------------------------------------------------
 
 export function SignInView() {
-  const router = useRouter();
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
 
-  const [showPassword, setShowPassword] = useState(false);
+  // Redirect authenticated users to dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+  const handleAuth0Login = () => {
+    loginWithRedirect({
+      appState: {
+        returnTo: '/',
+      },
+    });
+  };
+
+  // Show loading while Auth0 is checking authentication status
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '50vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // Don't render the login form if user is already authenticated
+  if (isAuthenticated) {
+    return null;
+  }
 
   const renderForm = (
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'flex-end',
         flexDirection: 'column',
+        gap: 2,
       }}
     >
-      <TextField
-        fullWidth
-        name="email"
-        label="Email address"
-        defaultValue="hello@gmail.com"
-        sx={{ mb: 3 }}
-        slotProps={{
-          inputLabel: { shrink: true },
-        }}
-      />
-
-      <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-        Forgot password?
-      </Link>
-
-      <TextField
-        fullWidth
-        name="password"
-        label="Password"
-        defaultValue="@demo1234"
-        type={showPassword ? 'text' : 'password'}
-        slotProps={{
-          inputLabel: { shrink: true },
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          },
-        }}
-        sx={{ mb: 3 }}
-      />
-
       <Button
         fullWidth
         size="large"
-        type="submit"
-        color="inherit"
         variant="contained"
-        onClick={handleSignIn}
+        onClick={handleAuth0Login}
+        sx={{
+          py: 1.5,
+          backgroundColor: '#4285f4',
+          '&:hover': {
+            backgroundColor: '#357ae8',
+          },
+        }}
       >
-        Sign in
+        Continue with Auth0
       </Button>
     </Box>
   );
@@ -92,42 +87,35 @@ export function SignInView() {
           mb: 5,
         }}
       >
-        <Typography variant="h5">Sign in</Typography>
+        <Typography variant="h5">Welcome to Botro Health</Typography>
         <Typography
           variant="body2"
           sx={{
             color: 'text.secondary',
+            textAlign: 'center',
           }}
         >
-          Don’t have an account?
-          <Link variant="subtitle2" sx={{ ml: 0.5 }}>
-            Get started
-          </Link>
+          Log in to continue to the admin dashboard
         </Typography>
       </Box>
       {renderForm}
-      <Divider sx={{ my: 3, '&::before, &::after': { borderTopStyle: 'dashed' } }}>
-        <Typography
-          variant="overline"
-          sx={{ color: 'text.secondary', fontWeight: 'fontWeightMedium' }}
-        >
-          OR
-        </Typography>
-      </Divider>
-      <Box
+      <Typography
+        variant="caption"
         sx={{
-          gap: 1,
-          display: 'flex',
-          justifyContent: 'center',
+          color: 'text.secondary',
+          textAlign: 'center',
+          mt: 3,
         }}
       >
-        <IconButton color="inherit">
-          <Iconify width={22} icon="socials:google" />
-        </IconButton>
-        <IconButton color="inherit">
-          <Iconify width={22} icon="socials:twitter" />
-        </IconButton>
-      </Box>
+        By continuing, you agree to Botro Health&apos;s{' '}
+        <Link variant="caption" sx={{ textDecoration: 'underline' }}>
+          Terms of Service
+        </Link>{' '}
+        and{' '}
+        <Link variant="caption" sx={{ textDecoration: 'underline' }}>
+          Privacy Policy
+        </Link>
+      </Typography>
     </>
   );
 }
