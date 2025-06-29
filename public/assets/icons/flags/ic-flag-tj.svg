@@ -1,0 +1,32 @@
+<svg height="20" viewBox="0 0 28 20" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <rect id="a" height="20" rx="3" width="28"/>
+    <mask id="b" fill="#fff">
+      <use fill="#fff" fill-rule="evenodd" xlink:href="#a"/>
+    </mask>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <!-- Tajikistan flag -->
+    <!-- Red stripe -->
+    <rect fill="#dc143c" height="6" width="28" y="0" mask="url(#b)" rx="3"/>
+    <!-- White stripe -->
+    <rect fill="#ffffff" height="8" width="28" y="6" mask="url(#b)"/>
+    <!-- Green stripe -->
+    <rect fill="#006600" height="6" width="28" y="14" mask="url(#b)" rx="3"/>
+    
+    <!-- Crown and stars in center (simplified) -->
+    <g fill="#ffd700" mask="url(#b)">
+      <!-- Crown -->
+      <path d="M12 8h4v2h-4z"/>
+      <path d="M13 7h2v1h-2z"/>
+      <!-- Stars -->
+      <circle cx="10" cy="9" r="0.5"/>
+      <circle cx="11" cy="8" r="0.5"/>
+      <circle cx="12" cy="7.5" r="0.5"/>
+      <circle cx="14" cy="7.5" r="0.5"/>
+      <circle cx="15" cy="8" r="0.5"/>
+      <circle cx="16" cy="9" r="0.5"/>
+      <circle cx="17" cy="8" r="0.5"/>
+    </g>
+  </g>
+</svg>

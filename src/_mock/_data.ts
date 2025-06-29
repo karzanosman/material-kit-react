@@ -105,14 +105,14 @@ export const _langs = [
     icon: '/assets/icons/flags/ic-flag-en.svg',
   },
   {
-    value: 'de',
-    label: 'German',
-    icon: '/assets/icons/flags/ic-flag-de.svg',
+    value: 'ar',
+    label: 'Arabic',
+    icon: '/assets/icons/flags/ic-flag-sa.svg',
   },
   {
-    value: 'fr',
-    label: 'French',
-    icon: '/assets/icons/flags/ic-flag-fr.svg',
+    value: 'ckb',
+    label: 'Kurdish',
+    icon: '/assets/icons/flags/ic-flag-tj.svg',
   },
 ];
 
