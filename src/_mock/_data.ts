@@ -103,18 +103,21 @@ export const _langs = [
     value: 'en',
     label: 'English',
     icon: '/assets/icons/flags/ic-flag-en.svg',
+    direction: 'ltr' as const,
   },
   {
     value: 'ar',
     label: 'Arabic',
     icon: '/assets/icons/flags/ic-flag-sa.svg',
+    direction: 'rtl' as const,
   },
   {
     value: 'ckb',
     label: 'Kurdish',
     icon: '/assets/icons/flags/ic-flag-tj.svg',
+    direction: 'rtl' as const,
   },
-];
+] as const;
 
 // ----------------------------------------------------------------------
 

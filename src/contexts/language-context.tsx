@@ -15,7 +15,7 @@ type LanguageContextType = {
   currentLanguage: Language;
   direction: 'ltr' | 'rtl';
   changeLanguage: (languageValue: string) => void;
-  languages: Language[];
+  languages: readonly Language[];
 };
 
 // ----------------------------------------------------------------------

@@ -12,10 +12,11 @@ import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 // ----------------------------------------------------------------------
 
 export type LanguagePopoverProps = IconButtonProps & {
-  data?: {
+  data?: readonly {
     value: string;
     label: string;
     icon: string;
+    direction: 'ltr' | 'rtl';
   }[];
 };
 
