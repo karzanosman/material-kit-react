@@ -109,6 +109,8 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
 
       {slots?.topArea}
 
+      <Box sx={{ my: 2 }} />
+
       <Scrollbar fillContent>
         <Box
           component="nav"
